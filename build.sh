@@ -1,0 +1,1 @@
+pyinstaller main.py --clean -F -n crashhandler -w

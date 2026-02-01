@@ -1,0 +1,2 @@
+tkLabel_TITLE:Uh oh! Fatal error!
+tkLabel_DESC:Report this issue to the developer through GitHub immediately\n\nRemember to include the file at\n'{appdata}/minamotion/rhythm-game/logs/godot.log'\nin your bug report!
