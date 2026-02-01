@@ -12,16 +12,19 @@ var is_close_request_queued: bool= false
 
 
 func _ready() -> void:
+	var gch_filename: String= "/crashhandler"
+	if OS.has_feature("windows"):
+		gch_filename += ".exe"
 	var gch_path: String= (func():
 		var _temp: PackedStringArray= OS.get_executable_path().split("/")
 		_temp.resize(_temp.size() -1)
-		return str("/".join(_temp), "/crashhandler")
+		return str("/".join(_temp), "/", gch_filename)
 	).call()
 	if FileAccess.file_exists(gch_path):
 		OS.create_process(gch_path, [str("--monitor-pid=", OS.get_process_id())])
 		crash_handler_exists = true
 	else:
-		push_warning("crashhandler doesn't exist")
+		push_warning("Crash Handler doesn't exist")
 	get_window().close_requested.connect(_on_window_close_requested)
 
 
