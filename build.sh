@@ -1,1 +1,3 @@
-pyinstaller main.py --clean -F -n crashhandler -w
+#!/bin/bash
+echo Running PyInstaller...
+pyinstaller main.py --clean -F -n crashhandler -w --add-data assets:assets

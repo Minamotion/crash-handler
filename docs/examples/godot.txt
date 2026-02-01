@@ -1,0 +1,39 @@
+# For this example to work, you must:
+# 1. Disable Auto Accept Quit in Project Settings.
+# 2. Make this script an autoload.
+#
+# Feel free to copy paste this in your Godot Project
+
+extends Node
+
+
+var crash_handler_exists: bool= false
+var is_close_request_queued: bool= false
+
+
+func _ready() -> void:
+	var gch_path: String= (func():
+		var _temp: PackedStringArray= OS.get_executable_path().split("/")
+		_temp.resize(_temp.size() -1)
+		return str("/".join(_temp), "/crashhandler")
+	).call()
+	if FileAccess.file_exists(gch_path):
+		OS.create_process(gch_path, [str("--monitor-pid=", OS.get_process_id())])
+		crash_handler_exists = true
+	else:
+		push_warning("crashhandler doesn't exist")
+	get_window().close_requested.connect(_on_window_close_requested)
+
+
+func _on_window_close_requested():
+	if crash_handler_exists:
+		var client = StreamPeerTCP.new()
+		var result: Error= client.connect_to_host("localhost", 6961)
+		if result != Error.OK:
+			while result != Error.OK:
+				result= client.connect_to_host("localhost", 6961)
+		client.put_u8(0) # Anything will do, honestly
+		client.disconnect_from_host()
+		is_close_request_queued = true
+	else:
+		is_close_request_queued = true

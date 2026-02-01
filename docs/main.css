@@ -1,0 +1,48 @@
+html {
+	font-family: sans-serif;
+	font-size: 1em;
+}
+
+body {
+	margin: 2em;
+	text-align: center;
+	background-color: whitesmoke;
+}
+
+h1 {
+	background-color: black;
+	color: white;
+}
+
+h2 {
+	border-bottom: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  font-size: .8em;
+  letter-spacing: 1px;
+  margin: auto;
+}
+
+thead {
+  background-color: black;
+  color: white
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+code {
+	background-color: black;
+	color: white;
+	padding: 4px;
+	border-radius: 8px;
+}
