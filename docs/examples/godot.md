@@ -1,3 +1,5 @@
+# Godot Example
+```gdscript
 # For this example to work, you must:
 # 1. Disable Auto Accept Quit in Project Settings.
 # 2. Make this script an autoload.
@@ -40,3 +42,4 @@ func _on_window_close_requested():
 		is_close_request_queued = true
 	else:
 		is_close_request_queued = true
+```
